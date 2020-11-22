@@ -1,9 +1,5 @@
 /* General */
 
-.test{
-    background-color: #475c82;
-}
-
 html,
 body {
   height: 100%;
@@ -12,12 +8,20 @@ body {
 
 header {
   grid-column: 1/-1;
-  background-color: #202225;
+  background-color: #17191b;
+}
+
+header span {
+    margin: 15px;
+    padding: 0px;
+    display: flex;
+    align-content: center;
+    color: #007849;
 }
 
 main {
   display: grid;
-  grid-template-rows: 60px auto;
+  grid-template-rows: 80px auto;
   grid-template-columns: minmax(300px, 25%) minmax(340px, auto);
   height: 100%;
   overflow-y: hidden;
@@ -27,7 +31,7 @@ h1 {
   margin: 0px;
   font-size: 80px;
   font-family: "Bebas Neue";
-  color: whitesmoke;
+  color: white;
 }
 
 h2 {
@@ -41,7 +45,7 @@ p {
   margin: 10px 0px;
   font-size: 18px;
   font-family: monospace;
-  color: whitesmoke;
+  color: white;
 }
 
 .space-between {
@@ -58,7 +62,7 @@ nav {
   border: 20px;
   padding: 10px 0px 20px 0px;
   overflow-y: scroll;
-  background-color: #37393e;
+  background-color: #202225;
 }
 
 .nav-card {
@@ -80,27 +84,27 @@ nav {
   border-radius: 0.3em;
   border-style: solid;
   font-size: 18px;
-  font-family: monospace;
-  color: whitesmoke;
+  font-family: "Lato";
+  color: white;
 }
 
 span.Introduced {
-  border-color: #475c82;
+  background-color: #475c82;
 }
 span.Engrossed {
-  border-color: #a8cbaf;
+  background-color: #a8cbaf;
 }
 span.Enrolled {
-  border-color: #f8daa3;
+  background-color: #f8daa3;
 }
 span.Passed {
-  border-color: #64b385;
+  background-color: #64b385;
 }
 span.Vetoed {
-  border-color: #f3b09d;
+  background-color: #f3b09d;
 }
 span.Failed {
-  border-color: #e18b88;
+  background-color: #e18b88;
 }
 
 /* Content */
@@ -108,25 +112,25 @@ span.Failed {
 section {
   height: auto;
   padding: 20px 30px 20px 20px;
-  background-color: #37393e;
+  background-color: #202225;
   overflow-y: scroll;
 }
 
 section p {
   font-size: 22px;
-  padding: 5px 0px;
+  padding: 20px 0px;
 }
 
 section h2 {
-  border-top: 7px solid #202225;
+  border-top: 7px solid #007849;
   margin: 50px 0px;
   text-align: center;
   line-height: 0em;
-  color: #202225;
+  color: #a75142;
 }
 
 section h2 span {
-  background: #37393e;
+  background: #202225;
   padding: 0px 10px;
 }
 
@@ -141,12 +145,12 @@ section h2 span {
 }
 
 .sponsor {
-  margin: 10px 10px;
+  margin: 0px 10px 20px 0px;
   padding: 5px;
   border-radius: 0.3em;
   border-style: solid;
   font-size: 22px;
-  font-family: monospace;
+  font-family: "Lato";
   color: white;
   display: inline-block;
 }
@@ -162,16 +166,16 @@ section h2 span {
   display: block;
   padding: 5px;
   font-size: 22px;
-  font-family: monospace;
-  color: whitesmoke;
+  font-family: "Lato";
+  color: white;
 }
 
 .progress .action {
     display: block;
     padding: 5px;
     font-size: 22px;
-    font-family: monospace;
-    color: whitesmoke;
+    font-family: "Lato";
+    color: white;
   }
 
 /* Miscellaneous */
@@ -179,3 +183,19 @@ section h2 span {
 ::-webkit-scrollbar {
   width: 0px;
 }
+
+/* #008f95
+#e86e80
+#e9b000
+#e24e42 
+
+#262228
+#007849
+
+DCF9DC
+7FC6A4
+334147
+1B1F22
+*/
+
+

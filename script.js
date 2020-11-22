@@ -1,6 +1,8 @@
-const API_KEY = "1746e141194bb3c5a7187530792f8912";
+const API_KEY = "b5d8806ecc9fea790f994448baa24b15";
 const state = "GA";
+
 const bills = [];
+let billCount = 0;
 
 $(window).on("load", () => {
   // Get Relevant Searches
@@ -18,17 +20,18 @@ $(window).on("load", () => {
         url: `https://api.legiscan.com/?key=${API_KEY}&op=getBill&id=${searches[i].bill_id}`,
         method: "GET",
       }).then((response) => {
-        bills.push(response.bill);
-        appendToFeed(response.bill, i);
+        appendToFeed(response.bill);
       });
     }
   };
 
   // Display Bills In Feed
-  const appendToFeed = (bill, i) => {
+  const appendToFeed = (bill) => {
+    bills.push(bill);
     const status = decodeBillStatus(bill.status);
+
     $("nav").append(
-      `<div class="nav-card" data-bill-index="${i}">
+      `<div class="nav-card" data-bill-index="${billCount}">
         <div class="space-between">
           <h2>${bill.bill_number}</h2>
           <span class="${status}">${status}</span>
@@ -36,47 +39,46 @@ $(window).on("load", () => {
         <p>${bill.title}</p>
       </div>`
     );
+
+    billCount++;
   };
 
-  // Writes Bill Info To Content
+  // Write Bill Info To Content
   const writeToContent = (billIndex) => {
     const bill = bills[billIndex];
     $("section").empty();
     $("section").append(
       `<div class="section-header">
         <h1>${bill.bill_number}</h1>
-        <div>
-          <span style="color: #208a4c; margin-right: 10px;">
-            <i class="far fa-thumbs-up fa-3x"></i>
+        <div data-has-voted="false">
+          <span style="color: #17191b; margin-right: 10px;">
+            <i class="far fa-thumbs-up fa-3x" data-vote="yea"></i>
           </span>
-          <span style="color: #a34643">
-            <i class="far fa-thumbs-down fa-3x fa-flip-horizontal"></i>
+          <span style="color: #17191b">
+            <i class="far fa-thumbs-down fa-3x fa-flip-horizontal" data-vote="nay"></i>
           </span>
         </div>
       </div>
-      <h2><span>Description</span></h2>
-      <p>${bill.description}</p>
-      <h2><span>Sponsors</span></h2>`
+      <p>${bill.description}</p>`
     );
 
     bill.sponsors.forEach((sponsor) => {
       $("section").append(
-        `<span class="sponsor">${sponsor.role} ${sponsor.name}</span>
-      <h2><span>Progress</span></h2>`
+        `<span class="sponsor">${sponsor.role} ${sponsor.name}</span>`
       );
     });
 
-    bill.history.forEach((moment) => {
+    for (let i = bill.history.length - 1; i > -1; i--) {
       $("section").append(
         `<div class="progress"> 
-        <span class="date">${moment.date}</span>
-        <span class="action"> ${moment.action} </span> 
+        <span class="date">${bill.history[i].date}</span>
+        <span class="action"> ${bill.history[i].action} </span> 
         </div>`
       );
-    });
+    }
   };
 
-  // Convert Status Number To Feed
+  // Convert Status Number To String
   const decodeBillStatus = (statusNum) => {
     switch (statusNum) {
       case 1:
@@ -94,12 +96,26 @@ $(window).on("load", () => {
     }
   };
 
-  // Register User Interaction
+  // Handle Nav Click
   $("nav").on("click", "div", function () {
     if (this.dataset.billIndex) {
       $("nav").children().removeClass("selected");
       $(this).addClass("selected");
       writeToContent(this.dataset.billIndex);
+    }
+  });
+
+  // Handle Section Click
+  $("section").on("click", "i", function () {
+    if (this.dataset.vote) {
+      console.log(this.dataset.vote);
+      if (this.dataset.vote === "yea") {
+        this.style.color = "#007849";
+        $(".fa-thumbs-up").animate({
+          "up": "+=100px",
+        });
+      } else this.style.color = "#a1402f";
+      $(".far").prop("disabled", true);
     }
   });
 });
