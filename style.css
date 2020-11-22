@@ -1,3 +1,9 @@
+/* General */
+
+.test{
+    background-color: #475c82;
+}
+
 html,
 body {
   height: 100%;
@@ -12,25 +18,19 @@ header {
 main {
   display: grid;
   grid-template-rows: 60px auto;
-  grid-template-columns: 300px auto;
+  grid-template-columns: minmax(300px, 25%) minmax(340px, auto);
   height: 100%;
-  overflow: hidden;
-}
-
-nav {
-  height: auto;
-  padding: 10px;
-  overflow-y: scroll;
-  background-color: #2f3136;
-}
-
-section {
-  height: auto;
-  padding: 10px;
-  background-color: #37393e;
+  overflow-y: hidden;
 }
 
 h1 {
+  margin: 0px;
+  font-size: 80px;
+  font-family: "Bebas Neue";
+  color: whitesmoke;
+}
+
+h2 {
   margin: 0px;
   font-size: 40px;
   font-family: "Bebas Neue";
@@ -38,54 +38,143 @@ h1 {
 }
 
 p {
-  font-family: "roboto";
+  margin: 10px 0px;
+  font-size: 18px;
+  font-family: monospace;
   color: whitesmoke;
 }
 
-span {
-  margin: 5px 0px;
-  padding: 5px;
-  border-radius: 0.3em;
-  border-style: solid;
-  font-family: "roboto";
-  color: white;
-}
-
-span.Introduced {
-    border-color: #475C82;
-}
-span.Engrossed {
-    border-color: #A8CBAF;
-}
-span.Enrolled {
-    border-color: #F8DAA3;
-}
-span.Passed {
-    border-color: #64b385;
-}
-span.Vetoed {
-    border-color: #F3B09D;
-}
-span.Failed {
-    border-color: #E18B88;
-}
-
-.card {
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: #2f3136;
-}
-
-.card.selected {
-  border-radius: 0.3em;
-  background-color: #37393e;
-}
-
-.card div {
+.space-between {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
+
+/* Feed */
+
+nav {
+  height: auto;
+  min-width: 300px;
+  border: 20px;
+  padding: 10px 0px 20px 0px;
+  overflow-y: scroll;
+  background-color: #37393e;
+}
+
+.nav-card {
+  margin: 20px 10px 10px 20px;
+  padding: 10px;
+  border-radius: 0.3em;
+  background-color: #2f3136;
+}
+
+.nav-card.selected {
+  background-color: #202225;
+}
+
+/* Status */
+
+.space-between span {
+  margin: 5px 0px;
+  padding: 5px;
+  border-radius: 0.3em;
+  border-style: solid;
+  font-size: 18px;
+  font-family: monospace;
+  color: whitesmoke;
+}
+
+span.Introduced {
+  border-color: #475c82;
+}
+span.Engrossed {
+  border-color: #a8cbaf;
+}
+span.Enrolled {
+  border-color: #f8daa3;
+}
+span.Passed {
+  border-color: #64b385;
+}
+span.Vetoed {
+  border-color: #f3b09d;
+}
+span.Failed {
+  border-color: #e18b88;
+}
+
+/* Content */
+
+section {
+  height: auto;
+  padding: 20px 30px 20px 20px;
+  background-color: #37393e;
+  overflow-y: scroll;
+}
+
+section p {
+  font-size: 22px;
+  padding: 5px 0px;
+}
+
+section h2 {
+  border-top: 7px solid #202225;
+  margin: 50px 0px;
+  text-align: center;
+  line-height: 0em;
+  color: #202225;
+}
+
+section h2 span {
+  background: #37393e;
+  padding: 0px 10px;
+}
+
+.section-header {
+  margin-top: 10px;
+  padding: 17px 20px 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.3em;
+  background-color: #2f3136;
+}
+
+.sponsor {
+  margin: 10px 10px;
+  padding: 5px;
+  border-radius: 0.3em;
+  border-style: solid;
+  font-size: 22px;
+  font-family: monospace;
+  color: white;
+  display: inline-block;
+}
+
+.progress {
+  margin-top: 10px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 0.3em;
+  background-color: #2f3136;
+}
+
+.progress .date {
+  display: block;
+  padding: 5px;
+  font-size: 22px;
+  font-family: monospace;
+  color: whitesmoke;
+}
+
+.progress .action {
+    display: block;
+    padding: 5px;
+    font-size: 22px;
+    font-family: monospace;
+    color: whitesmoke;
+  }
+
+/* Miscellaneous */
 
 ::-webkit-scrollbar {
   width: 0px;

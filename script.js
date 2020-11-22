@@ -13,7 +13,6 @@ $(window).on("load", () => {
 
   // Get Specific Bill Info
   const getBills = (searches) => {
-    console.log(searches);
     for (let i = 0; i < searches.length - 1; i++) {
       $.ajax({
         url: `https://api.legiscan.com/?key=${API_KEY}&op=getBill&id=${searches[i].bill_id}`,
@@ -27,16 +26,54 @@ $(window).on("load", () => {
 
   // Display Bills In Feed
   const appendToFeed = (bill, i) => {
-    const status = decodeBillStatus(bill.status)
+    const status = decodeBillStatus(bill.status);
     $("nav").append(
-      `<div class="card" data-bill-index="${i}">
-        <div>
-          <h1>${bill.bill_number}</h1>
+      `<div class="nav-card" data-bill-index="${i}">
+        <div class="space-between">
+          <h2>${bill.bill_number}</h2>
           <span class="${status}">${status}</span>
         </div>
         <p>${bill.title}</p>
       </div>`
     );
+  };
+
+  // Writes Bill Info To Content
+  const writeToContent = (billIndex) => {
+    const bill = bills[billIndex];
+    $("section").empty();
+    $("section").append(
+      `<div class="section-header">
+        <h1>${bill.bill_number}</h1>
+        <div>
+          <span style="color: #208a4c; margin-right: 10px;">
+            <i class="far fa-thumbs-up fa-3x"></i>
+          </span>
+          <span style="color: #a34643">
+            <i class="far fa-thumbs-down fa-3x fa-flip-horizontal"></i>
+          </span>
+        </div>
+      </div>
+      <h2><span>Description</span></h2>
+      <p>${bill.description}</p>
+      <h2><span>Sponsors</span></h2>`
+    );
+
+    bill.sponsors.forEach((sponsor) => {
+      $("section").append(
+        `<span class="sponsor">${sponsor.role} ${sponsor.name}</span>
+      <h2><span>Progress</span></h2>`
+      );
+    });
+
+    bill.history.forEach((moment) => {
+      $("section").append(
+        `<div class="progress"> 
+        <span class="date">${moment.date}</span>
+        <span class="action"> ${moment.action} </span> 
+        </div>`
+      );
+    });
   };
 
   // Convert Status Number To Feed
@@ -59,7 +96,10 @@ $(window).on("load", () => {
 
   // Register User Interaction
   $("nav").on("click", "div", function () {
-    $("nav").children().removeClass("selected");
-    $(this).addClass("selected");
+    if (this.dataset.billIndex) {
+      $("nav").children().removeClass("selected");
+      $(this).addClass("selected");
+      writeToContent(this.dataset.billIndex);
+    }
   });
 });
